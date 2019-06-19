@@ -1,0 +1,13 @@
+from scipy.stats import norm
+from tqdm import tqdm
+cnt = 0
+for i in tqdm(range(10**4)):
+    n = 10**5
+    x = np.random.normal(4, 1.0 , n)
+    y = x > 8
+    y = y * norm.pdf(x,0,1) / norm.pdf(x,4,1)
+    cnt += np.sum(y)
+p = cnt / 10**9
+
+
+ans = 1 - norm.cdf(8)
