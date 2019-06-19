@@ -1,0 +1,29 @@
+import numpy as np
+from tqdm import tqdm
+
+
+win_cnt = 100
+lost_cnt = 0
+x = 20
+
+p = 18/38
+alp = 20/38
+
+total_cnt = 0
+cnt = 0
+
+n = 100
+x = 20*np.ones(n)
+for _ in tqdm(range(10**5)):
+    tmp = np.random.binomial(1,alp,n)
+    tmp[tmp==0] = -1
+    x += tmp
+    total_cnt += np.sum(x==40)
+    total_cnt += np.sum(x==0)
+    cnt += np.sum(x==40)
+#    cnt -= np.sum(x==0)
+    x[x==40] = 20
+    x[x==0] = 20
+
+
+ans = cnt* (p /alp)**180 / total_cnt
